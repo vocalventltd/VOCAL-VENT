@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Form - Vocal Vent</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .form-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .required::after {
+            content: " *";
+            color: red;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Navigation -->
+        <div class="flex items-center justify-between mb-8">
+            <a href="booking.html" class="text-purple-600 hover:text-purple-800">
+                <i class="fas fa-arrow-left mr-2"></i> Back to Packages
+            </a>
+            <div class="text-sm text-gray-600">
+                Package: <span id="currentPackage" class="font-bold"></span>
+            </div>
+        </div>
+
+        <!-- Progress Indicator -->
+        <div class="mb-12">
+            <div class="flex items-center justify-between">
+                <div class="text-center">
+                    <div class="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-2">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <span class="text-sm font-medium">Package Selected</span>
+                </div>
+                <div class="h-1 flex-1 bg-green-500 mx-4"></div>
+                <div class="text-center">
+                    <div class="w-10 h-10 bg-purple-600 text-white rounded-full flex items-center justify-center mx-auto mb-2">
+                        <span>2</span>
+                    </div>
+                    <span class="text-sm font-medium">Booking Details</span>
+                </div>
+                <div class="h-1 flex-1 bg-gray-300 mx-4"></div>
+                <div class="text-center">
+                    <div class="w-10 h-10 bg-gray-300 text-gray-600 rounded-full flex items-center justify-center mx-auto mb-2">
+                        <span>3</span>
+                    </div>
+                    <span class="text-sm font-medium">Payment</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Booking Form -->
+        <form id="bookingForm" class="space-y-8">
+            <!-- Package Summary -->
+            <div class="form-section p-6">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">Booking Summary</h2>
+                <div id="packageSummary" class="bg-gray-50 p-4 rounded-lg">
+                    <!-- Will be filled by JavaScript -->
+                </div>
+            </div>
+
+            <!-- Personal Information -->
+            <div class="form-section p-6">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">Your Information</h2>
+                
+                <!-- Nickname -->
+                <div class="mb-6">
+                    <label for="nickname" class="block text-gray-700 font-medium mb-2 required">
+                        Nickname
+                    </label>
+                    <input type="text" id="nickname" 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                           placeholder="Enter a nickname (not your real name)"
+                           required>
+                    <p class="text-sm text-gray-500 mt-1">
+                        Use a consistent nickname across all pages. Do not use your real name.
+                    </p>
+                </div>
+
+                <!-- Date and Time -->
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label for="date" class="block text-gray-700 font-medium mb-2 required">
+                            Date of Call
+                        </label>
+                        <input type="date" id="date" 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                               required>
+                    </div>
+                    <div>
+                        <label for="time" class="block text-gray-700 font-medium mb-2 required">
+                            Time of Call
+                        </label>
+                        <input type="time" id="time" 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                               required>
+                    </div>
+                </div>
+
+                <!-- Call Method -->
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-medium mb-3 required">
+                        Call Method
+                    </label>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <input type="radio" id="callMe" name="callMethod" value="callMe" class="hidden peer" required>
+                            <label for="callMe" 
+                                   class="block p-4 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-purple-500 peer-checked:border-purple-600 peer-checked:bg-purple-50">
+                                <div class="flex items-center">
+                                    <div class="w-6 h-6 rounded-full border-2 border-gray-300 peer-checked:border-purple-600 peer-checked:bg-purple-600 flex items-center justify-center mr-3">
+                                        <i class="fas fa-check text-white text-xs hidden peer-checked:block"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold">Vocal Vent Calls You</h4>
+                                        <p class="text-sm text-gray-600">We'll call you at your preferred time</p>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                        <div>
+                            <input type="radio" id="iCall" name="callMethod" value="iCall" class="hidden peer" required>
+                            <label for="iCall" 
+                                   class="block p-4 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-purple-500 peer-checked:border-purple-600 peer-checked:bg-purple-50">
+                                <div class="flex items-center">
+                                    <div class="w-6 h-6 rounded-full border-2 border-gray-300 peer-checked:border-purple-600 peer-checked:bg-purple-600 flex items-center justify-center mr-3">
+                                        <i class="fas fa-check text-white text-xs hidden peer-checked:block"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold">You Call Vocal Vent</h4>
+                                        <p class="text-sm text-gray-600">You'll call us at your preferred time</p>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phone Number (Conditional) -->
+                <div id="phoneNumberSection" class="mb-6 hidden">
+                    <label for="phone" class="block text-gray-700 font-medium mb-2 required">
+                        Phone Number
+                    </label>
+                    <input type="tel" id="phone" 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                           placeholder="Enter your phone number">
+                    <p class="text-sm text-gray-500 mt-1">
+                        <i class="fas fa-shield-alt mr-1"></i>
+                        NOTE: Number will be protected by our Data Privacy and Protection Policy
+                    </p>
+                </div>
+
+                <!-- Contact Numbers (Conditional) -->
+                <div id="contactNumbersSection" class="mb-6 hidden">
+                    <label class="block text-gray-700 font-medium mb-2">
+                        Contact Numbers
+                    </label>
+                    <div class="space-y-3">
+                        <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-phone text-purple-600 mr-3"></i>
+                            <div class="flex-1">
+                                <span class="font-medium">Contact Line 1</span>
+                            </div>
+                            <a href="tel:+254700000001" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition duration-300">
+                                <i class="fas fa-phone-alt mr-2"></i>Call
+                            </a>
+                        </div>
+                        <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                            <i class="fas fa-phone text-purple-600 mr-3"></i>
+                            <div class="flex-1">
+                                <span class="font-medium">Contact Line 2</span>
+                            </div>
+                            <a href="tel:+254700000002" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition duration-300">
+                                <i class="fas fa-phone-alt mr-2"></i>Call
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Listener Preference -->
+                <div class="mb-6">
+                    <label for="listenerPreference" class="block text-gray-700 font-medium mb-2">
+                        Listener Preference (Optional)
+                    </label>
+                    <select id="listenerPreference" 
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                        <option value="any">No Preference - Either Male or Female</option>
+                        <option value="male">Prefer Male Listener</option>
+                        <option value="female">Prefer Female Listener</option>
+                    </select>
+                </div>
+
+                <!-- Referral Code -->
+                <div class="mb-6">
+                    <label for="referralCode" class="block text-gray-700 font-medium mb-2">
+                        Referral Code (Optional)
+                    </label>
+                    <input type="text" id="referralCode" 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                           placeholder="Enter referral code if any">
+                </div>
+
+                <!-- Terms and Conditions -->
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <input type="checkbox" id="terms1" 
+                               class="mt-1 mr-3 h-5 w-5 text-purple-600 rounded focus:ring-purple-500">
+                        <label for="terms1" class="text-gray-700">
+                            Submitting this appointment shows consent to our Terms and Conditions of service.
+                        </label>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <input type="checkbox" id="terms2" 
+                               class="mt-1 mr-3 h-5 w-5 text-purple-600 rounded focus:ring-purple-500">
+                        <label for="terms2" class="text-gray-700">
+                            I Agree to pay for the service and understand that the service will not be offered before payment
+                        </label>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <input type="checkbox" id="terms3" 
+                               class="mt-1 mr-3 h-5 w-5 text-purple-600 rounded focus:ring-purple-500">
+                        <label for="terms3" class="text-gray-700">
+                            I Agree to the Terms and Conditions of Service
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+                <button type="submit" 
+                        class="bg-green-600 text-white py-4 px-12 rounded-lg text-xl font-bold hover:bg-green-700 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                        id="submitBtn" disabled>
+                    <i class="fas fa-paper-plane mr-2"></i> Submit Booking
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Load selected package
+        window.addEventListener('DOMContentLoaded', function() {
+            const selectedPackage = JSON.parse(localStorage.getItem('selectedPackage'));
+            if (!selectedPackage) {
+                window.location.href = 'booking.html';
+                return;
+            }
+
+            // Update UI with package info
+            document.getElementById('currentPackage').textContent = selectedPackage.fullName;
+            
+            const packageSummary = document.getElementById('packageSummary');
+            packageSummary.innerHTML = `
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h3 class="font-bold text-lg">${selectedPackage.fullName}</h3>
+                        <p class="text-gray-600">${selectedPackage.description}</p>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-2xl font-bold text-purple-600">KSH ${selectedPackage.price}</div>
+                    </div>
+                </div>
+            `;
+
+            // Set minimum date to tomorrow
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            const minDate = tomorrow.toISOString().split('T')[0];
+            document.getElementById('date').min = minDate;
+
+            // Set reasonable time constraints (9 AM to 8 PM)
+            document.getElementById('time').min = "09:00";
+            document.getElementById('time').max = "20:00";
+        });
+
+        // Call method toggle
+        const callMeRadio = document.getElementById('callMe');
+        const iCallRadio = document.getElementById('iCall');
+        const phoneNumberSection = document.getElementById('phoneNumberSection');
+        const contactNumbersSection = document.getElementById('contactNumbersSection');
+
+        callMeRadio.addEventListener('change', function() {
+            if (this.checked) {
+                phoneNumberSection.classList.remove('hidden');
+                contactNumbersSection.classList.add('hidden');
+                document.getElementById('phone').required = true;
+            }
+        });
+
+        iCallRadio.addEventListener('change', function() {
+            if (this.checked) {
+                phoneNumberSection.classList.add('hidden');
+                contactNumbersSection.classList.remove('hidden');
+                document.getElementById('phone').required = false;
+            }
+        });
+
+        // Form validation
+        const terms1 = document.getElementById('terms1');
+        const terms2 = document.getElementById('terms2');
+        const terms3 = document.getElementById('terms3');
+        const submitBtn = document.getElementById('submitBtn');
+        const bookingForm = document.getElementById('bookingForm');
+
+        function validateForm() {
+            const isCallMethodSelected = callMeRadio.checked || iCallRadio.checked;
+            const areTermsAccepted = terms1.checked && terms2.checked && terms3.checked;
+            
+            submitBtn.disabled = !areTermsAccepted || !isCallMethodSelected;
+        }
+
+        // Add event listeners to terms checkboxes
+        [terms1, terms2, terms3].forEach(checkbox => {
+            checkbox.addEventListener('change', validateForm);
+        });
+
+        // Add event listeners to call method radios
+        [callMeRadio, iCallRadio].forEach(radio => {
+            radio.addEventListener('change', validateForm);
+        });
+
+        // Form submission
+        bookingForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!terms1.checked || !terms2.checked || !terms3.checked) {
+                alert('Please accept all terms and conditions to proceed.');
+                return;
+            }
+
+            if (!callMeRadio.checked && !iCallRadio.checked) {
+                alert('Please select a call method.');
+                return;
+            }
+
+            if (callMeRadio.checked && !document.getElementById('phone').value) {
+                alert('Please provide your phone number for us to call you.');
+                return;
+            }
+
+            // Collect form data
+            const formData = {
+                package: JSON.parse(localStorage.getItem('selectedPackage')),
+                nickname: document.getElementById('nickname').value,
+                date: document.getElementById('date').value,
+                time: document.getElementById('time').value,
+                callMethod: document.querySelector('input[name="callMethod"]:checked').value,
+                phone: document.getElementById('phone').value,
+                listenerPreference: document.getElementById('listenerPreference').value,
+                referralCode: document.getElementById('referralCode').value,
+                timestamp: new Date().toISOString()
+            };
+
+            // Save booking to localStorage (in a real app, this would go to a database)
+            const bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+            bookings.push(formData);
+            localStorage.setItem('bookings', JSON.stringify(bookings));
+            localStorage.setItem('currentBooking', JSON.stringify(formData));
+
+            // Redirect to payment page
+            window.location.href = 'payment.html';
+        });
+
+        // Initialize form validation
+        validateForm();
+    </script>
+</body>
+</html>
