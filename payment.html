@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - Vocal Vent</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .payment-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Navigation -->
+        <div class="flex items-center mb-8">
+            <a href="booking-form.html" class="text-purple-600 hover:text-purple-800">
+                <i class="fas fa-arrow-left mr-2"></i> Back to Booking
+            </a>
+        </div>
+
+        <!-- Progress Indicator -->
+        <div class="mb-12">
+            <div class="flex items-center justify-between">
+                <div class="text-center">
+                    <div class="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-2">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <span class="text-sm font-medium">Package Selected</span>
+                </div>
+                <div class="h-1 flex-1 bg-green-500 mx-4"></div>
+                <div class="text-center">
+                    <div class="w-10 h-10 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-2">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <span class="text-sm font-medium">Booking Details</span>
+                </div>
+                <div class="h-1 flex-1 bg-purple-600 mx-4"></div>
+                <div class="text-center">
+                    <div class="w-10 h-10 bg-purple-600 text-white rounded-full flex items-center justify-center mx-auto mb-2">
+                        <span>3</span>
+                    </div>
+                    <span class="text-sm font-medium">Payment</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Payment Summary -->
+            <div>
+                <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+                    <h2 class="text-2xl font-bold mb-6 text-gray-800">Booking Summary</h2>
+                    <div id="bookingSummary" class="space-y-4">
+                        <!-- Will be filled by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h2 class="text-2xl font-bold mb-6 text-gray-800">Payment Partner</h2>
+                    <div class="text-center p-8 border-2 border-dashed border-gray-300 rounded-lg">
+                        <i class="fas fa-lock text-5xl text-green-500 mb-4"></i>
+                        <h3 class="text-xl font-bold mb-2">Payd Money</h3>
+                        <p class="text-gray-600 mb-4">
+                            Secure payment processed through our trusted partner
+                        </p>
+                        <div class="inline-flex items-center bg-gray-100 px-4 py-2 rounded-lg">
+                            <i class="fas fa-shield-alt text-green-500 mr-2"></i>
+                            <span class="text-sm">PCI DSS Compliant</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Payment Card -->
+            <div>
+                <div class="payment-card rounded-xl shadow-lg p-8">
+                    <div class="text-center mb-8">
+                        <i class="fas fa-credit-card text-5xl mb-4 opacity-90"></i>
+                        <h2 class="text-3xl font-bold mb-2">Complete Payment</h2>
+                        <p class="opacity-90">Secure payment with Payd Money</p>
+                    </div>
+
+                    <!-- Payment Form -->
+                    <form id="paymentForm" class="space-y-6">
+                        <!-- Card Number -->
+                        <div>
+                            <label class="block opacity-90 mb-2">Card Number</label>
+                            <div class="relative">
+                                <input type="text" 
+                                       class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 backdrop-blur-sm border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:ring-2 focus:ring-white"
+                                       placeholder="1234 5678 9012 3456"
+                                       maxlength="19"
+                                       id="cardNumber"
+                                       required>
+                                <i class="fas fa-credit-card absolute right-3 top-3 opacity-70"></i>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <!-- Expiry Date -->
+                            <div>
+                                <label class="block opacity-90 mb-2">Expiry Date</label>
+                                <input type="text" 
+                                       class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 backdrop-blur-sm border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:ring-2 focus:ring-white"
+                                       placeholder="MM/YY"
+                                       maxlength="5"
+                                       id="expiryDate"
+                                       required>
+                            </div>
+
+                            <!-- CVV -->
+                            <div>
+                                <label class="block opacity-90 mb-2">CVV</label>
+                                <div class="relative">
+                                    <input type="text" 
+                                           class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 backdrop-blur-sm border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:ring-2 focus:ring-white"
+                                           placeholder="123"
+                                           maxlength="3"
+                                           id="cvv"
+                                           required>
+                                    <i class="fas fa-lock absolute right-3 top-3 opacity-70"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Cardholder Name -->
+                        <div>
+                            <label class="block opacity-90 mb-2">Cardholder Name</label>
+                            <input type="text" 
+                                   class="w-full px-4 py-3 rounded-lg bg-white bg-opacity-20 backdrop-blur-sm border border-white border-opacity-30 text-white placeholder-white placeholder-opacity-70 focus:outline-none focus:ring-2 focus:ring-white"
+                                   placeholder="John Doe"
+                                   id="cardholderName"
+                                   required>
+                        </div>
+
+                        <!-- Amount Display -->
+                        <div class="pt-6 border-t border-white border-opacity-30">
+                            <div class="flex justify-between items-center mb-4">
+                                <span class="opacity-90">Total Amount:</span>
+                                <span id="paymentAmount" class="text-2xl font-bold"></span>
+                            </div>
+
+                            <!-- Pay Button -->
+                            <button type="submit" 
+                                    class="w-full bg-white text-purple-600 py-4 rounded-lg text-xl font-bold hover:bg-gray-100 transition duration-300"
+                                    id="payButton">
+                                <i class="fas fa-lock mr-2"></i> Pay Now
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Payment Processing Loader -->
+                    <div id="paymentLoader" class="hidden text-center mt-6">
+                        <div class="loader mx-auto mb-4"></div>
+                        <p class="opacity-90">Processing your payment...</p>
+                        <p class="text-sm opacity-70 mt-2">Please do not close this window</p>
+                    </div>
+                </div>
+
+                <!-- Payment Note -->
+                <div class="mt-6 text-center text-gray-600 text-sm">
+                    <p>
+                        <i class="fas fa-info-circle mr-1"></i>
+                        Your payment is secured with 256-bit SSL encryption
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Success Modal -->
+    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-xl max-w-md w-full p-8">
+            <div class="text-center mb-6">
+                <div class="w-20 h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-check text-3xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">Payment Successful!</h3>
+                <p class="text-gray-600">Your booking has been confirmed</p>
+            </div>
+            
+            <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                <div class="text-center">
+                    <p class="text-gray-700 mb-2">Booking Reference:</p>
+                    <p class="text-xl font-bold text-purple-600" id="bookingRef"></p>
+                </div>
+            </div>
+            
+            <div class="space-y-3 mb-6">
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Package:</span>
+                    <span class="font-medium" id="successPackage"></span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Date & Time:</span>
+                    <span class="font-medium" id="successDateTime"></span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Amount Paid:</span>
+                    <span class="font-medium" id="successAmount"></span>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <a href="index.html" 
+                   class="inline-block w-full bg-purple-600 text-white py-3 px-4 rounded-lg font-bold hover:bg-purple-700 transition duration-300">
+                    Return to Home
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Failed Modal -->
+    <div id="failedModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-xl max-w-md w-full p-8">
+            <div class="text-center mb-6">
+                <div class="w-20 h-20 bg-red-100 text-red-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-times text-3xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">Payment Failed</h3>
+                <p class="text-gray-600" id="errorMessage">There was an issue processing your payment</p>
+            </div>
+            
+            <div class="space-y-4">
+                <button id="retryPaymentBtn" 
+                        class="w-full bg-purple-600 text-white py-3 px-4 rounded-lg font-bold hover:bg-purple-700 transition duration-300">
+                    Try Again
+                </button>
+                <button id="contactSupportBtn" 
+                        class="w-full border border-gray-300 text-gray-700 py-3 px-4 rounded-lg font-bold hover:bg-gray-50 transition duration-300">
+                    Contact Support
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Load booking data
+        window.addEventListener('DOMContentLoaded', function() {
+            const booking = JSON.parse(localStorage.getItem('currentBooking'));
+            if (!booking) {
+                window.location.href = 'booking.html';
+                return;
+            }
+
+            // Update booking summary
+            const bookingSummary = document.getElementById('bookingSummary');
+            const packageInfo = booking.package;
+            
+            bookingSummary.innerHTML = `
+                <div class="flex justify-between items-center pb-4 border-b">
+                    <span class="text-gray-600">Package:</span>
+                    <span class="font-bold">${packageInfo.fullName}</span>
+                </div>
+                <div class="flex justify-between items-center pb-4 border-b">
+                    <span class="text-gray-600">Nickname:</span>
+                    <span class="font-bold">${booking.nickname}</span>
+                </div>
+                <div class="flex justify-between items-center pb-4 border-b">
+                    <span class="text-gray-600">Date:</span>
+                    <span class="font-bold">${new Date(booking.date).toLocaleDateString()}</span>
+                </div>
+                <div class="flex justify-between items-center pb-4 border-b">
+                    <span class="text-gray-600">Time:</span>
+                    <span class="font-bold">${booking.time}</span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span class="text-gray-600">Call Method:</span>
+                    <span class="font-bold">${booking.callMethod === 'callMe' ? 'We call you' : 'You call us'}</span>
+                </div>
+            `;
+
+            // Update payment amount
+            document.getElementById('paymentAmount').textContent = `KSH ${packageInfo.price}`;
+
+            // Format card number input
+            document.getElementById('cardNumber').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
+                e.target.value = value;
+            });
+
+            // Format expiry date input
+            document.getElementById('expiryDate').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length >= 2) {
+                    value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                }
+                e.target.value = value;
+            });
+        });
+
+        // Payd Money API Configuration
+        const PAYD_CONFIG = {
+            username: 'S9uy63diFWNRnkjHGiXw',
+            password: 'IpnsfKUCalfZJ5ZrYJImgoJylIZZNz3FK3S2LbAY',
+            apiSecret: 'Wc6OdqaoR2c2qMWa3kgWzKqQ9QJRYRHNhNVuwg5C',
+            baseUrl: 'https://api.paydmoney.com/v1' // Example URL - replace with actual Payd Money API URL
+        };
+
+        // Payment form submission
+        const paymentForm = document.getElementById('paymentForm');
+        const paymentLoader = document.getElementById('paymentLoader');
+        const payButton = document.getElementById('payButton');
+        const successModal = document.getElementById('successModal');
+        const failedModal = document.getElementById('failedModal');
+        const retryPaymentBtn = document.getElementById('retryPaymentBtn');
+        const contactSupportBtn = document.getElementById('contactSupportBtn');
+
+        paymentForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Show loader
+            paymentLoader.classList.remove('hidden');
+            payButton.disabled = true;
+
+            // Get form data
+            const cardNumber = document.getElementById('cardNumber').value.replace(/\s/g, '');
+            const expiryDate = document.getElementById('expiryDate').value;
+            const cvv = document.getElementById('cvv').value;
+            const cardholderName = document.getElementById('cardholderName').value;
+
+            // Validate card number (basic Luhn check)
+            if (!isValidCardNumber(cardNumber)) {
+                showError('Invalid card number');
+                return;
+            }
+
+            // Validate expiry date
+            if (!isValidExpiryDate(expiryDate)) {
+                showError('Invalid expiry date');
+                return;
+            }
+
+            // Validate CVV
+            if (cvv.length < 3 || cvv.length > 4) {
+                showError('Invalid CVV');
+                return;
+            }
+
+            try {
+                // Simulate API call to Payd Money
+                // In a real implementation, this would be a server-side call
+                const booking = JSON.parse(localStorage.getItem('currentBooking'));
+                const paymentData = {
+                    amount: booking.package.price,
+                    currency: 'KES',
+                    cardNumber: cardNumber,
+                    expiryDate: expiryDate,
+                    cvv: cvv,
+                    cardholderName: cardholderName,
+                    bookingId: generateBookingId(),
+                    timestamp: new Date().toISOString()
+                };
+
+                // Simulate API delay
+                await simulatePayment(paymentData);
+                
+                // Payment successful
+                showSuccess(paymentData.bookingId);
+
+            } catch (error) {
+                showError(error.message || 'Payment failed. Please try again.');
+            }
+        });
+
+        // Helper functions
+        function isValidCardNumber(number) {
+            // Basic Luhn algorithm check
+            let sum = 0;
+            let isEven = false;
+            
+            for (let i = number.length - 1; i >= 0; i--) {
+                let digit = parseInt(number.charAt(i), 10);
+                
+                if (isEven) {
+                    digit *= 2;
+                    if (digit > 9) {
+                        digit -= 9;
+                    }
+                }
+                
+                sum += digit;
+                isEven = !isEven;
+            }
+            
+            return (sum % 10) === 0;
+        }
+
+        function isValidExpiryDate(expiry) {
+            const [month, year] = expiry.split('/');
+            if (!month || !year || month.length !== 2 || year.length !== 2) {
+                return false;
+            }
+            
+            const now = new Date();
+            const currentYear = now.getFullYear() % 100;
+            const currentMonth = now.getMonth() + 1;
+            
+            const expMonth = parseInt(month, 10);
+            const expYear = parseInt(year, 10);
+            
+            if (expMonth < 1 || expMonth > 12) return false;
+            if (expYear < currentYear) return false;
+            if (expYear === currentYear && expMonth < currentMonth) return false;
+            
+            return true;
+        }
+
+        function generateBookingId() {
+            return 'VV-' + Date.now() + '-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+        }
+
+        function simulatePayment(paymentData) {
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    // Simulate 90% success rate
+                    if (Math.random() < 0.9) {
+                        resolve({
+                            success: true,
+                            transactionId: 'TXN-' + Date.now(),
+                            bookingId: paymentData.bookingId,
+                            amount: paymentData.amount,
+                            currency: paymentData.currency
+                        });
+                    } else {
+                        reject(new Error('Payment declined by bank'));
+                    }
+                }, 2000);
+            });
+        }
+
+        function showSuccess(bookingRef) {
+            paymentLoader.classList.add('hidden');
+            
+            const booking = JSON.parse(localStorage.getItem('currentBooking'));
+            
+            // Update success modal
+            document.getElementById('bookingRef').textContent = bookingRef;
+            document.getElementById('successPackage').textContent = booking.package.fullName;
+            document.getElementById('successDateTime').textContent = 
+                `${new Date(booking.date).toLocaleDateString()} at ${booking.time}`;
+            document.getElementById('successAmount').textContent = `KSH ${booking.package.price}`;
+            
+            // Show success modal
+            successModal.classList.remove('hidden');
+            successModal.classList.add('flex');
+        }
+
+        function showError(message) {
+            paymentLoader.classList.add('hidden');
+            payButton.disabled = false;
+            
+            document.getElementById('errorMessage').textContent = message;
+            failedModal.classList.remove('hidden');
+            failedModal.classList.add('flex');
+        }
+
+        // Modal event listeners
+        retryPaymentBtn.addEventListener('click', function() {
+            failedModal.classList.add('hidden');
+            failedModal.classList.remove('flex');
+        });
+
+        contactSupportBtn.addEventListener('click', function() {
+            // In a real app, this would open support contact
+            alert('Please email support@vocalvent.com or call +254 700 000 000');
+        });
+
+        // Close modals when clicking outside
+        [successModal, failedModal].forEach(modal => {
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
