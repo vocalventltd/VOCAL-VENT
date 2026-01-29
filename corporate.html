@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Corporate Services - Vocal Vent</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .corporate-gradient {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+        }
+        .form-step {
+            display: none;
+        }
+        .form-step.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .step-indicator {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            background: #e5e7eb;
+            color: #6b7280;
+        }
+        .step-indicator.active {
+            background: #4f46e5;
+            color: white;
+        }
+        .step-indicator.completed {
+            background: #10b981;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Navigation -->
+        <div class="flex items-center mb-8">
+            <a href="index.html" class="text-purple-600 hover:text-purple-800">
+                <i class="fas fa-arrow-left mr-2"></i> Back to Home
+            </a>
+        </div>
+
+        <!-- Corporate Header -->
+        <div class="corporate-gradient text-white rounded-xl p-8 mb-8">
+            <div class="text-center">
+                <i class="fas fa-building text-5xl mb-4 opacity-90"></i>
+                <h1 class="text-3xl md:text-4xl font-bold mb-4">Vocal Vent Corporate</h1>
+                <p class="text-xl opacity-90">Employee Well-being Through Anonymous Venting</p>
+            </div>
+        </div>
+
+        <!-- Progress Steps -->
+        <div class="mb-12">
+            <div class="flex items-center justify-between max-w-2xl mx-auto">
+                <div class="flex flex-col items-center">
+                    <div class="step-indicator completed">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <span class="mt-2 text-sm font-medium">Introduction</span>
+                </div>
+                <div class="h-1 flex-1 bg-gray-300 mx-2"></div>
+                <div class="flex flex-col items-center">
+                    <div class="step-indicator active" id="step2">2</div>
+                    <span class="mt-2 text-sm font-medium">Institution Details</span>
+                </div>
+                <div class="h-1 flex-1 bg-gray-300 mx-2"></div>
+                <div class="flex flex-col items-center">
+                    <div class="step-indicator" id="step3">3</div>
+                    <span class="mt-2 text-sm font-medium">Contact Info</span>
+                </div>
+                <div class="h-1 flex-1 bg-gray-300 mx-2"></div>
+                <div class="flex flex-col items-center">
+                    <div class="step-indicator" id="step4">4</div>
+                    <span class="mt-2 text-sm font-medium">Review & Submit</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Introduction Step -->
+        <div id="step1" class="form-step active">
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">Welcome to Vocal Vent Corporate</h2>
+                
+                <div class="space-y-6">
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                        <p class="text-gray-700">
+                            Thank you for your interest in Vocal Vent Corporate. This form will guide you through the sign up process of the Corporate package. After submission our team will get back to you as soon as possible and guide you through subscription packages and help you on on-boarding a subscription. Thank you and looking forward to a fulfilling engagement.
+                        </p>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 text-gray-800">About Vocal Vent Corporate Space:</h3>
+                        <p class="text-gray-600 mb-4">
+                            The Vocal Vent Corporate Space offers company or institution employees/members a 10 Minute Space 4 Times a Month to vent and release whatever is holding them back, Speaking it out is always a step in letting it go.
+                        </p>
+                        <p class="text-gray-600">
+                            Companies/Corporates/Institutions sign up and subscribe for their members as a well being program for them and allow a private anonymous avenue to speak their frustrations. A separate service with licensed therapists is also available as a different package.
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-6 mt-8">
+                        <div class="text-center p-6 bg-gray-50 rounded-lg">
+                            <i class="fas fa-user-shield text-blue-500 text-3xl mb-4"></i>
+                            <h4 class="font-bold mb-2">Anonymous</h4>
+                            <p class="text-sm text-gray-600">Complete anonymity for employees</p>
+                        </div>
+                        <div class="text-center p-6 bg-gray-50 rounded-lg">
+                            <i class="fas fa-calendar-check text-blue-500 text-3xl mb-4"></i>
+                            <h4 class="font-bold mb-2">4 Sessions/Month</h4>
+                            <p class="text-sm text-gray-600">Regular venting opportunities</p>
+                        </div>
+                        <div class="text-center p-6 bg-gray-50 rounded-lg">
+                            <i class="fas fa-chart-line text-blue-500 text-3xl mb-4"></i>
+                            <h4 class="font-bold mb-2">Well-being Metrics</h4>
+                            <p class="text-sm text-gray-600">Track employee well-being trends</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-8">
+                    <button id="startFormBtn" 
+                            class="bg-blue-600 text-white py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300">
+                        Begin Sign Up Process
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Institution Details Step -->
+        <div id="step2" class="form-step">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">Institution Details</h2>
+                
+                <form id="corporateForm">
+                    <!-- Name of Institution -->
+                    <div class="mb-6">
+                        <label for="institutionName" class="block text-gray-700 font-medium mb-2 required">
+                            Name of Institution
+                        </label>
+                        <input type="text" id="institutionName" 
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                               placeholder="Enter institution name"
+                               required>
+                    </div>
+
+                    <!-- Location of Institution -->
+                    <div class="mb-6">
+                        <label for="institutionLocation" class="block text-gray-700 font-medium mb-2 required">
+                            Location of Institution (Detailed)
+                        </label>
+                        <textarea id="institutionLocation" 
+                                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                  rows="3"
+                                  placeholder="Enter detailed location including city, street, building, etc."
+                                  required></textarea>
+                    </div>
+
+                    <!-- Number of Members -->
+                    <div class="mb-6">
+                        <label for="memberCount" class="block text-gray-700 font-medium mb-2 required">
+                            Approximate number of members to be subscribed for the service
+                        </label>
+                        <select id="memberCount" 
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                required>
+                            <option value="">Select range</option>
+                            <option value="1-50">1-50 members</option>
+                            <option value="51-100">51-100 members</option>
+                            <option value="101-250">101-250 members</option>
+                            <option value="251-500">251-500 members</option>
+                            <option value="501-1000">501-1000 members</option>
+                            <option value="1000+">1000+ members</option>
+                        </select>
+                    </div>
+
+                    <!-- Navigation Buttons -->
+                    <div class="flex justify-between mt-8">
+                        <button type="button" id="backToStep1" 
+                                class="border border-gray-300 text-gray-700 py-3 px-6 rounded-lg font-bold hover:bg-gray-50 transition duration-300">
+                            <i class="fas fa-arrow-left mr-2"></i> Back
+                        </button>
+                        <button type="button" id="nextToStep3" 
+                                class="bg-blue-600 text-white py-3 px-6 rounded-lg font-bold hover:bg-blue-700 transition duration-300">
+                            Continue <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Contact Information Step -->
+        <div id="step3" class="form-step">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">Contact Information</h2>
+                
+                <!-- Representative Name -->
+                <div class="mb-6">
+                    <label for="representativeName" class="block text-gray-700 font-medium mb-2 required">
+                        Name of representative (For Contact Purposes)
+                    </label>
+                    <input type="text" id="representativeName" 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                           placeholder="Enter representative's name"
+                           required>
+                </div>
+
+                <!-- Representative Position -->
+                <div class="mb-6">
+                    <label for="representativePosition" class="block text-gray-700 font-medium mb-2 required">
+                        Position of representative
+                    </label>
+                    <input type="text" id="representativePosition" 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                           placeholder="e.g., HR Manager, Director"
+                           required>
+                </div>
+
+                <!-- Phone Number -->
+                <div class="mb-6">
+                    <label for="representativePhone" class="block text-gray-700 font-medium mb-2 required">
+                        Phone Number
+                    </label>
+                    <input type="tel" id="representativePhone" 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                           placeholder="Enter phone number"
+                           required>
+                </div>
+
+                <!-- Email -->
+                <div class="mb-6">
+                    <label for="representativeEmail" class="block text-gray-700 font-medium mb-2 required">
+                        Email Address
+                    </label>
+                    <input type="email" id="representativeEmail" 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                           placeholder="Enter email address"
+                           required>
+                </div>
+
+                <!-- Package Interest -->
+                <div class="mb-6">
+                    <label for="packageInterest" class="block text-gray-700 font-medium mb-2 required">
+                        What package is your institution interested in?
+                    </label>
+                    <select id="packageInterest" 
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            required>
+                        <option value="">Select package</option>
+                        <option value="anonymous">Anonymous Venting Service by Vocal Vent</option>
+                        <option value="therapist">Vocal Vent Licensed Therapist Services for Institutions</option>
+                        <option value="both">All Services</option>
+                        <option value="unsure">Not Sure</option>
+                    </select>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="flex justify-between mt-8">
+                    <button type="button" id="backToStep2" 
+                            class="border border-gray-300 text-gray-700 py-3 px-6 rounded-lg font-bold hover:bg-gray-50 transition duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i> Back
+                    </button>
+                    <button type="button" id="nextToStep4" 
+                            class="bg-blue-600 text-white py-3 px-6 rounded-lg font-bold hover:bg-blue-700 transition duration-300">
+                        Continue <i class="fas fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Review & Submit Step -->
+        <div id="step4" class="form-step">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-2xl font-bold mb-6 text-gray-800">Review & Submit</h2>
+                
+                <!-- Affiliate Code -->
+                <div class="mb-6">
+                    <label for="affiliateCode" class="block text-gray-700 font-medium mb-2">
+                        Affiliate Code (If Any, If None Please Ignore)
+                    </label>
+                    <input type="text" id="affiliateCode" 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                           placeholder="Enter affiliate code if applicable">
+                </div>
+
+                <!-- Questions or Inquiries -->
+                <div class="mb-8">
+                    <label for="inquiries" class="block text-gray-700 font-medium mb-2">
+                        Questions or Inquiries
+                    </label>
+                    <textarea id="inquiries" 
+                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                              rows="4"
+                              placeholder="Any questions or additional information you'd like to share"></textarea>
+                </div>
+
+                <!-- Review Summary -->
+                <div class="bg-gray-50 rounded-lg p-6 mb-8">
+                    <h3 class="font-bold text-lg mb-4">Submission Summary</h3>
+                    <div class="space-y-3" id="reviewSummary">
+                        <!-- Will be filled by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Terms Agreement -->
+                <div class="mb-8">
+                    <div class="flex items-start mb-4">
+                        <input type="checkbox" id="corporateTerms" 
+                               class="mt-1 mr-3 h-5 w-5 text-blue-600 rounded focus:ring-blue-500">
+                        <label for="corporateTerms" class="text-gray-700">
+                            I agree that the information provided is accurate and I authorize Vocal Vent to contact me regarding corporate services. I understand that this is a request for information and not a binding agreement.
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="flex justify-between">
+                    <button type="button" id="backToStep3" 
+                            class="border border-gray-300 text-gray-700 py-3 px-6 rounded-lg font-bold hover:bg-gray-50 transition duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i> Back
+                    </button>
+                    <button type="button" id="submitCorporateForm" 
+                            class="bg-green-600 text-white py-3 px-8 rounded-lg font-bold hover:bg-green-700 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                            disabled>
+                        <i class="fas fa-paper-plane mr-2"></i> Submit Request
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-xl max-w-md w-full p-8">
+            <div class="text-center mb-6">
+                <div class="w-20 h-20 bg-green-100 text-green-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-check text-3xl"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">Request Submitted!</h3>
+                <p class="text-gray-600">Thank you for your interest in Vocal Vent Corporate</p>
+            </div>
+            
+            <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                <p class="text-center text-gray-700">
+                    Our team will contact you within 24-48 hours to discuss your corporate wellness needs and provide customized pricing options.
+                </p>
+            </div>
+            
+            <div class="text-center">
+                <a href="index.html" 
+                   class="inline-block w-full bg-blue-600 text-white py-3 px-4 rounded-lg font-bold hover:bg-blue-700 transition duration-300">
+                    Return to Home
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Form data object
+        const corporateFormData = {
+            step1: {},
+            step2: {},
+            step3: {},
+            step4: {}
+        };
+
+        // Step navigation
+        const steps = document.querySelectorAll('.form-step');
+        const stepIndicators = document.querySelectorAll('.step-indicator');
+        const startFormBtn = document.getElementById('startFormBtn');
+        const corporateTerms = document.getElementById('corporateTerms');
+        const submitCorporateFormBtn = document.getElementById('submitCorporateForm');
+        const successModal = document.getElementById('successModal');
+
+        let currentStep = 1;
+
+        // Initialize step indicators
+        function updateStepIndicators() {
+            stepIndicators.forEach((indicator, index) => {
+                const stepNumber = index + 1;
+                indicator.classList.remove('active', 'completed');
+                
+                if (stepNumber < currentStep) {
+                    indicator.classList.add('completed');
+                    indicator.innerHTML = '<i class="fas fa-check"></i>';
+                } else if (stepNumber === currentStep) {
+                    indicator.classList.add('active');
+                    indicator.textContent = stepNumber;
+                } else {
+                    indicator.textContent = stepNumber;
+                }
+            });
+        }
+
+        // Show step
+        function showStep(stepNumber) {
+            steps.forEach(step => {
+                step.classList.remove('active');
+            });
+            
+            document.getElementById(`step${stepNumber}`).classList.add('active');
+            currentStep = stepNumber;
+            updateStepIndicators();
+            
+            // Scroll to top of form
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Navigation event listeners
+        startFormBtn.addEventListener('click', () => showStep(2));
+
+        document.getElementById('backToStep1')?.addEventListener('click', () => showStep(1));
+        document.getElementById('nextToStep3')?.addEventListener('click', () => {
+            // Validate step 2
+            const institutionName = document.getElementById('institutionName').value;
+            const institutionLocation = document.getElementById('institutionLocation').value;
+            const memberCount = document.getElementById('memberCount').value;
+            
+            if (!institutionName || !institutionLocation || !memberCount) {
+                alert('Please fill all required fields in Institution Details');
+                return;
+            }
+            
+            // Save step 2 data
+            corporateFormData.step2 = {
+                institutionName,
+                institutionLocation,
+                memberCount
+            };
+            
+            showStep(3);
+        });
+
+        document.getElementById('backToStep2')?.addEventListener('click', () => showStep(2));
+        document.getElementById('nextToStep4')?.addEventListener('click', () => {
+            // Validate step 3
+            const representativeName = document.getElementById('representativeName').value;
+            const representativePosition = document.getElementById('representativePosition').value;
+            const representativePhone = document.getElementById('representativePhone').value;
+            const representativeEmail = document.getElementById('representativeEmail').value;
+            const packageInterest = document.getElementById('packageInterest').value;
+            
+            if (!representativeName || !representativePosition || !representativePhone || !representativeEmail || !packageInterest) {
+                alert('Please fill all required fields in Contact Information');
+                return;
+            }
+            
+            // Save step 3 data
+            corporateFormData.step3 = {
+                representativeName,
+                representativePosition,
+                representativePhone,
+                representativeEmail,
+                packageInterest
+            };
+            
+            // Update review summary
+            updateReviewSummary();
+            showStep(4);
+        });
+
+        document.getElementById('backToStep3')?.addEventListener('click', () => showStep(3));
+
+        // Update review summary
+        function updateReviewSummary() {
+            const summaryDiv = document.getElementById('reviewSummary');
+            
+            const packageLabels = {
+                'anonymous': 'Anonymous Venting Service',
+                'therapist': 'Licensed Therapist Services',
+                'both': 'All Services',
+                'unsure': 'Not Sure'
+            };
+            
+            const summaryHTML = `
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Institution:</span>
+                    <span class="font-medium">${corporateFormData.step2.institutionName}</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Location:</span>
+                    <span class="font-medium">${corporateFormData.step2.institutionLocation.substring(0, 50)}...</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Members:</span>
+                    <span class="font-medium">${corporateFormData.step2.memberCount}</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Contact Person:</span>
+                    <span class="font-medium">${corporateFormData.step3.representativeName}</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Position:</span>
+                    <span class="font-medium">${corporateFormData.step3.representativePosition}</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-gray-600">Package Interest:</span>
+                    <span class="font-medium">${packageLabels[corporateFormData.step3.packageInterest]}</span>
+                </div>
+            `;
+            
+            summaryDiv.innerHTML = summaryHTML;
+        }
+
+        // Terms agreement
+        corporateTerms.addEventListener('change', function() {
+            submitCorporateFormBtn.disabled = !this.checked;
+        });
+
+        // Form submission
+        submitCorporateFormBtn.addEventListener('click', function() {
+            if (!corporateTerms.checked) {
+                alert('Please agree to the terms before submitting');
+                return;
+            }
+            
+            // Collect all form data
+            const affiliateCode = document.getElementById('affiliateCode').value;
+            const inquiries = document.getElementById('inquiries').value;
+            
+            const completeFormData = {
+                ...corporateFormData.step2,
+                ...corporateFormData.step3,
+                affiliateCode,
+                inquiries,
+                submissionDate: new Date().toISOString(),
+                status: 'pending'
+            };
+            
+            // Save to localStorage (in a real app, this would go to a database)
+            const corporateRequests = JSON.parse(localStorage.getItem('corporateRequests') || '[]');
+            corporateRequests.push(completeFormData);
+            localStorage.setItem('corporateRequests', JSON.stringify(corporateRequests));
+            
+            // Generate corporate ID for members
+            const corporateId = generateCorporateId(completeFormData.institutionName);
+            
+            // Store corporate ID for future use
+            localStorage.setItem('corporateId', corporateId);
+            
+            // Show success modal
+            successModal.classList.remove('hidden');
+            successModal.classList.add('flex');
+        });
+
+        // Generate corporate ID
+        function generateCorporateId(institutionName) {
+            const prefix = institutionName.substring(0, 3).toUpperCase();
+            const timestamp = Date.now().toString().substring(7);
+            const random = Math.random().toString(36).substring(2, 6).toUpperCase();
+            return `CORP-${prefix}-${timestamp}-${random}`;
+        }
+
+        // Close modal when clicking outside
+        successModal.addEventListener('click', function(e) {
+            if (e.target === successModal) {
+                successModal.classList.add('hidden');
+                successModal.classList.remove('flex');
+            }
+        });
+
+        // Initialize
+        updateStepIndicators();
+    </script>
+</body>
+</html>
