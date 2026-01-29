@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disclaimer - Vocal Vent</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .disclaimer-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .checkbox-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Back Button -->
+        <a href="index.html" class="inline-flex items-center text-purple-600 mb-6 hover:text-purple-800">
+            <i class="fas fa-arrow-left mr-2"></i> Back to Home
+        </a>
+
+        <!-- Disclaimer Card -->
+        <div class="bg-white rounded-xl shadow-2xl overflow-hidden">
+            <!-- Header -->
+            <div class="disclaimer-box p-8 text-center">
+                <i class="fas fa-exclamation-triangle text-4xl mb-4"></i>
+                <h1 class="text-3xl md:text-4xl font-bold mb-4">Important Disclaimer</h1>
+                <p class="text-xl opacity-90">Please read carefully before proceeding</p>
+            </div>
+
+            <!-- Disclaimer Content -->
+            <div class="p-8">
+                <div class="mb-8">
+                    <p class="text-lg text-gray-700 mb-6">
+                        We are not licensed therapists or mental health professionals. Our platform is designed to provide a safe and supportive space for individuals to express their thoughts and emotions. While we encourage open communication and provide a non-judgmental environment, our services are not intended to replace professional therapy or counseling. If you are in need of professional mental health support, we strongly recommend seeking guidance from a licensed therapist or counselor.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="checkbox-container">
+                            <label class="flex items-center cursor-pointer">
+                                <input type="checkbox" id="agreement1" class="form-checkbox h-5 w-5 text-purple-600 mr-3">
+                                <span class="text-lg">"I agree I am not receiving professional therapy."</span>
+                            </label>
+                        </div>
+                        
+                        <div class="checkbox-container">
+                            <label class="flex items-center cursor-pointer">
+                                <input type="checkbox" id="agreement2" class="form-checkbox h-5 w-5 text-purple-600 mr-3">
+                                <span class="text-lg">"This is a support service, not crisis care."</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex flex-col md:flex-row gap-4 mt-8">
+                    <button id="agreeBtn" 
+                            class="flex-1 bg-gradient-to-r from-green-500 to-green-600 text-white py-4 px-6 rounded-lg text-xl font-bold hover:from-green-600 hover:to-green-700 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                            disabled>
+                        <i class="fas fa-check-circle mr-2"></i> I UNDERSTAND & AGREE
+                    </button>
+                    
+                    <button id="disagreeBtn" 
+                            class="flex-1 bg-gradient-to-r from-red-500 to-red-600 text-white py-4 px-6 rounded-lg text-xl font-bold hover:from-red-600 hover:to-red-700 transition duration-300">
+                        <i class="fas fa-times-circle mr-2"></i> I DISAGREE
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Disagreement Modal -->
+    <div id="disagreeModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-xl max-w-md w-full p-8">
+            <div class="text-center mb-6">
+                <i class="fas fa-exclamation-circle text-red-500 text-5xl mb-4"></i>
+                <h3 class="text-2xl font-bold text-gray-800 mb-4">Access Not Granted</h3>
+            </div>
+            
+            <div class="text-gray-600 mb-6">
+                <p class="mb-4">
+                    We have noticed that you have not agreed to our disclaimer regarding the nature of our service. As our platform is intended for individuals who understand that it is not a substitute for professional therapy, access to the service requires acceptance of this disclaimer.
+                </p>
+                <p class="mb-4">
+                    Unfortunately, without your agreement, you will not be able to proceed with using the service.
+                </p>
+                <p>
+                    If you would like to use our venting space, please review and accept the terms outlined in the disclaimer.
+                </p>
+                <p class="mt-4 font-medium">Thank you for understanding.</p>
+            </div>
+            
+            <div class="flex gap-4">
+                <button id="reviewBtn" 
+                        class="flex-1 bg-purple-600 text-white py-3 px-4 rounded-lg font-bold hover:bg-purple-700 transition duration-300">
+                    REVIEW DISCLAIMER
+                </button>
+                <button id="closeModalBtn" 
+                        class="flex-1 border border-gray-300 text-gray-700 py-3 px-4 rounded-lg font-bold hover:bg-gray-50 transition duration-300">
+                    CLOSE
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Checkbox validation
+        const agreement1 = document.getElementById('agreement1');
+        const agreement2 = document.getElementById('agreement2');
+        const agreeBtn = document.getElementById('agreeBtn');
+        const disagreeBtn = document.getElementById('disagreeBtn');
+        const disagreeModal = document.getElementById('disagreeModal');
+        const reviewBtn = document.getElementById('reviewBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+
+        function validateCheckboxes() {
+            agreeBtn.disabled = !(agreement1.checked && agreement2.checked);
+        }
+
+        agreement1.addEventListener('change', validateCheckboxes);
+        agreement2.addEventListener('change', validateCheckboxes);
+
+        // Agree button action
+        agreeBtn.addEventListener('click', function() {
+            if (agreement1.checked && agreement2.checked) {
+                // Store agreement in localStorage
+                localStorage.setItem('vocalVentAgreement', 'true');
+                localStorage.setItem('agreementTimestamp', Date.now());
+                
+                // Redirect to booking page
+                window.location.href = 'booking.html';
+            }
+        });
+
+        // Disagree button action
+        disagreeBtn.addEventListener('click', function() {
+            disagreeModal.classList.remove('hidden');
+            disagreeModal.classList.add('flex');
+        });
+
+        // Review disclaimer button
+        reviewBtn.addEventListener('click', function() {
+            disagreeModal.classList.add('hidden');
+            disagreeModal.classList.remove('flex');
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Close modal button
+        closeModalBtn.addEventListener('click', function() {
+            disagreeModal.classList.add('hidden');
+            disagreeModal.classList.remove('flex');
+        });
+
+        // Close modal when clicking outside
+        disagreeModal.addEventListener('click', function(e) {
+            if (e.target === disagreeModal) {
+                disagreeModal.classList.add('hidden');
+                disagreeModal.classList.remove('flex');
+            }
+        });
+    </script>
+</body>
+</html>
