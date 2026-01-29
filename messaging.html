@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messaging Chat - Vocal Vent</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .chat-option {
+            transition: all 0.3s ease;
+        }
+        .chat-option:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .selected-option {
+            border-color: #667eea;
+            background-color: rgba(102, 126, 234, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Navigation -->
+        <div class="flex items-center mb-8">
+            <a href="booking.html" class="text-purple-600 hover:text-purple-800">
+                <i class="fas fa-arrow-left mr-2"></i> Back to Services
+            </a>
+        </div>
+
+        <h1 class="text-3xl md:text-4xl font-bold text-center mb-2 text-gray-800">
+            Messaging Chat Service
+        </h1>
+        <p class="text-center text-gray-600 mb-8">
+            Vent through messaging - Choose your preferred platform
+        </p>
+
+        <!-- Chat Options -->
+        <div class="grid md:grid-cols-2 gap-6 mb-12">
+            <!-- WhatsApp -->
+            <div class="chat-option bg-white rounded-xl shadow-lg p-6 cursor-pointer border-2 border-transparent hover:border-green-500"
+                 data-platform="whatsapp">
+                <div class="text-center">
+                    <div class="text-green-500 text-5xl mb-4">
+                        <i class="fab fa-whatsapp"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">WhatsApp Chat</h3>
+                    <p class="text-gray-600 mb-4">
+                        Chat with our trained listeners via WhatsApp
+                    </p>
+                    <div class="inline-flex items-center bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm">
+                        <i class="fas fa-users mr-1"></i>
+                        <span>Most Popular</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- In-App Chat -->
+            <div class="chat-option bg-white rounded-xl shadow-lg p-6 cursor-pointer border-2 border-transparent hover:border-purple-500"
+                 data-platform="inapp">
+                <div class="text-center">
+                    <div class="text-purple-500 text-5xl mb-4">
+                        <i class="fas fa-comment-dots"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">In-App Chat</h3>
+                    <p class="text-gray-600 mb-4">
+                        Chat directly within the Vocal Vent app
+                    </p>
+                    <div class="inline-flex items-center bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm">
+                        <i class="fas fa-star mr-1"></i>
+                        <span>New Feature</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SMS -->
+            <div class="chat-option bg-white rounded-xl shadow-lg p-6 cursor-pointer border-2 border-transparent hover:border-blue-500"
+                 data-platform="sms">
+                <div class="text-center">
+                    <div class="text-blue-500 text-5xl mb-4">
+                        <i class="fas fa-sms"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">SMS Chat</h3>
+                    <p class="text-gray-600 mb-4">
+                        Vent via text message (SMS)
+                    </p>
+                    <div class="inline-flex items-center bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-sm">
+                        <i class="fas fa-mobile-alt mr-1"></i>
+                        <span>No Internet Required</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instagram -->
+            <div class="chat-option bg-white rounded-xl shadow-lg p-6 cursor-pointer border-2 border-transparent hover:border-pink-500"
+                 data-platform="instagram">
+                <div class="text-center">
+                    <div class="text-pink-500 text-5xl mb-4">
+                        <i class="fab fa-instagram"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Instagram DM</h3>
+                    <p class="text-gray-600 mb-4">
+                        Message us through Instagram Direct Messages
+                    </p>
+                    <div class="inline-flex items-center bg-pink-100 text-pink-700 px-3 py-1 rounded-full text-sm">
+                        <i class="fas fa-hashtag mr-1"></i>
+                        <span>Social Media</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Duration Selection -->
+        <div id="durationSection" class="hidden bg-white rounded-xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Select Chat Duration</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- 30 Minutes -->
+                <div class="border-2 border-gray-300 rounded-xl p-6 cursor-pointer hover:border-purple-500 duration-option"
+                     data-duration="30" data-price="300">
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-gray-800 mb-2">30</div>
+                        <div class="text-lg font-medium text-gray-700 mb-2">Minutes</div>
+                        <div class="text-2xl font-bold text-purple-600 mb-4">KSH 300</div>
+                        <div class="bg-purple-100 text-purple-700 px-4 py-2 rounded-lg font-medium">
+                            Most Popular
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 1 Hour -->
+                <div class="border-2 border-gray-300 rounded-xl p-6 cursor-pointer hover:border-purple-500 duration-option"
+                     data-duration="60" data-price="500">
+                    <div class="text-center">
+                        <div class="text-4xl font-bold text-gray-800 mb-2">60</div>
+                        <div class="text-lg font-medium text-gray-700 mb-2">Minutes</div>
+                        <div class="text-2xl font-bold text-purple-600 mb-4">KSH 500</div>
+                        <div class="bg-green-100 text-green-700 px-4 py-2 rounded-lg font-medium">
+                            Best Value
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Selected Option Summary -->
+        <div id="selectionSummary" class="hidden bg-white rounded-xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">Your Selection</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-bold text-gray-700 mb-2">Platform:</h3>
+                    <div class="flex items-center p-4 bg-gray-50 rounded-lg">
+                        <i id="platformIcon" class="text-2xl mr-3"></i>
+                        <div>
+                            <div id="platformName" class="font-bold text-lg"></div>
+                            <div id="platformDescription" class="text-gray-600 text-sm"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-gray-700 mb-2">Duration:</h3>
+                    <div class="p-4 bg-gray-50 rounded-lg">
+                        <div id="durationDisplay" class="font-bold text-lg"></div>
+                        <div id="priceDisplay" class="text-purple-600 text-2xl font-bold"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="mt-8 flex gap-4">
+                <button id="startChatBtn" 
+                        class="flex-1 bg-green-600 text-white py-4 px-6 rounded-lg text-xl font-bold hover:bg-green-700 transition duration-300">
+                    <i class="fas fa-comment-dots mr-2"></i> Start Chat
+                </button>
+                
+                <button id="changeSelectionBtn" 
+                        class="flex-1 border border-gray-300 text-gray-700 py-4 px-6 rounded-lg text-xl font-bold hover:bg-gray-50 transition duration-300">
+                    <i class="fas fa-redo mr-2"></i> Change Selection
+                </button>
+            </div>
+        </div>
+
+        <!-- Chat Instructions -->
+        <div class="bg-white rounded-xl shadow-lg p-8">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">How It Works</h2>
+            
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="text-center">
+                    <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-xl font-bold">1</span>
+                    </div>
+                    <h3 class="font-bold mb-2">Choose Platform</h3>
+                    <p class="text-gray-600 text-sm">
+                        Select your preferred messaging platform
+                    </p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-xl font-bold">2</span>
+                    </div>
+                    <h3 class="font-bold mb-2">Select Duration</h3>
+                    <p class="text-gray-600 text-sm">
+                        Choose how long you want to chat (30 min or 1 hour)
+                    </p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-xl font-bold">3</span>
+                    </div>
+                    <h3 class="font-bold mb-2">Start Chatting</h3>
+                    <p class="text-gray-600 text-sm">
+                        Complete payment and begin your venting session
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded">
+                <div class="flex">
+                    <i class="fas fa-exclamation-triangle text-yellow-500 mt-1 mr-3"></i>
+                    <div>
+                        <h4 class="font-bold text-yellow-800 mb-1">Important Reminder</h4>
+                        <p class="text-yellow-700 text-sm">
+                            Remember to use a nickname, not your real name. All chats are anonymous and your privacy is protected by our Data Privacy and Protection Policy.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- In-App Chat Modal -->
+    <div id="inappChatModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-xl max-w-md w-full">
+            <div class="p-6 border-b">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xl font-bold">In-App Chat Setup</h3>
+                    <button id="closeInAppModal" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="p-6">
+                <div class="text-center mb-6">
+                    <i class="fas fa-comment-dots text-5xl text-purple-500 mb-4"></i>
+                    <h4 class="text-lg font-bold mb-2">Ready to Chat?</h4>
+                    <p class="text-gray-600">
+                        Please enter a nickname to start your anonymous chat session
+                    </p>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-medium mb-2">Nickname</label>
+                    <input type="text" id="chatNickname" 
+                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                           placeholder="Choose a nickname">
+                </div>
+                
+                <div class="space-y-3">
+                    <button id="startInAppChatBtn" 
+                            class="w-full bg-purple-600 text-white py-3 px-4 rounded-lg font-bold hover:bg-purple-700 transition duration-300">
+                        Start Chat Session
+                    </button>
+                    <button id="cancelInAppChatBtn" 
+                            class="w-full border border-gray-300 text-gray-700 py-3 px-4 rounded-lg font-bold hover:bg-gray-50 transition duration-300">
+                        Cancel
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Session Interface -->
+    <div id="chatSession" class="fixed inset-0 bg-gray-50 hidden flex-col z-50">
+        <!-- Chat Header -->
+        <div class="bg-purple-600 text-white p-4">
+            <div class="container mx-auto flex justify-between items-center">
+                <div class="flex items-center">
+                    <button id="endChatBtn" class="mr-4 text-white hover:text-gray-200">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <div>
+                        <h3 class="font-bold">Vocal Vent Chat</h3>
+                        <p class="text-sm opacity-90">Connected</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <div class="text-sm">Duration: <span id="chatTimer">30:00</span></div>
+                    <div class="text-xs opacity-90">Anonymous Chat</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Messages -->
+        <div class="flex-1 overflow-y-auto p-4">
+            <div class="max-w-3xl mx-auto space-y-4">
+                <!-- Welcome Message -->
+                <div class="flex justify-start">
+                    <div class="bg-gray-200 rounded-xl p-4 max-w-[80%]">
+                        <p class="font-bold text-purple-600 mb-1">Vocal Vent Listener</p>
+                        <p>Hello! I'm here to listen. You can share whatever is on your mind. Remember, this is a safe and anonymous space.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Input -->
+        <div class="border-t bg-white p-4">
+            <div class="max-w-3xl mx-auto">
+                <div class="flex">
+                    <input type="text" id="chatInput" 
+                           class="flex-1 px-4 py-3 border border-gray-300 rounded-l-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                           placeholder="Type your message...">
+                    <button id="sendMessageBtn" 
+                            class="bg-purple-600 text-white px-6 rounded-r-lg hover:bg-purple-700 transition duration-300">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <div class="text-center mt-2">
+                    <p class="text-sm text-gray-500">
+                        <i class="fas fa-shield-alt mr-1"></i>
+                        Your messages are encrypted and anonymous
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Chat platform selection
+        const chatOptions = document.querySelectorAll('.chat-option');
+        const durationSection = document.getElementById('durationSection');
+        const selectionSummary = document.getElementById('selectionSummary');
+        const changeSelectionBtn = document.getElementById('changeSelectionBtn');
+        const startChatBtn = document.getElementById('startChatBtn');
+        
+        const inappChatModal = document.getElementById('inappChatModal');
+        const closeInAppModal = document.getElementById('closeInAppModal');
+        const startInAppChatBtn = document.getElementById('startInAppChatBtn');
+        const cancelInAppChatBtn = document.getElementById('cancelInAppChatBtn');
+        
+        const chatSession = document.getElementById('chatSession');
+        const endChatBtn = document.getElementById('endChatBtn');
+        const chatInput = document.getElementById('chatInput');
+        const sendMessageBtn = document.getElementById('sendMessageBtn');
+        const chatTimer = document.getElementById('chatTimer');
+
+        let selectedPlatform = null;
+        let selectedDuration = null;
+        let selectedPrice = null;
+        let chatTimeLeft = 1800; // 30 minutes in seconds
+        let timerInterval = null;
+
+        // Platform information
+        const platformInfo = {
+            whatsapp: {
+                name: 'WhatsApp Chat',
+                icon: 'fab fa-whatsapp',
+                color: 'text-green-500',
+                description: 'Chat via WhatsApp with our trained listeners'
+            },
+            inapp: {
+                name: 'In-App Chat',
+                icon: 'fas fa-comment-dots',
+                color: 'text-purple-500',
+                description: 'Chat directly within the Vocal Vent app'
+            },
+            sms: {
+                name: 'SMS Chat',
+                icon: 'fas fa-sms',
+                color: 'text-blue-500',
+                description: 'Vent via text message (SMS)'
+            },
+            instagram: {
+                name: 'Instagram DM',
+                icon: 'fab fa-instagram',
+                color: 'text-pink-500',
+                description: 'Message us through Instagram Direct Messages'
+            }
+        };
+
+        // Platform selection
+        chatOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                selectedPlatform = this.getAttribute('data-platform');
+                
+                // Update UI
+                chatOptions.forEach(opt => {
+                    opt.classList.remove('selected-option');
+                    opt.classList.remove('border-green-500', 'border-purple-500', 'border-blue-500', 'border-pink-500');
+                });
+                
+                this.classList.add('selected-option');
+                const borderColor = this.getAttribute('data-platform') === 'whatsapp' ? 'border-green-500' :
+                                  this.getAttribute('data-platform') === 'inapp' ? 'border-purple-500' :
+                                  this.getAttribute('data-platform') === 'sms' ? 'border-blue-500' :
+                                  'border-pink-500';
+                this.classList.add(borderColor);
+                
+                // Show duration selection
+                durationSection.classList.remove('hidden');
+                selectionSummary.classList.add('hidden');
+                
+                // Scroll to duration section
+                durationSection.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Duration selection
+        document.querySelectorAll('.duration-option').forEach(option => {
+            option.addEventListener('click', function() {
+                selectedDuration = this.getAttribute('data-duration');
+                selectedPrice = this.getAttribute('data-price');
+                
+                // Update UI
+                document.querySelectorAll('.duration-option').forEach(opt => {
+                    opt.classList.remove('selected-option', 'border-purple-500');
+                });
+                this.classList.add('selected-option', 'border-purple-500');
+                
+                // Update selection summary
+                updateSelectionSummary();
+                
+                // Show selection summary
+                selectionSummary.classList.remove('hidden');
+                
+                // Scroll to summary
+                selectionSummary.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        function updateSelectionSummary() {
+            const platform = platformInfo[selectedPlatform];
+            document.getElementById('platformIcon').className = `${platform.icon} ${platform.color} text-2xl`;
+            document.getElementById('platformName').textContent = platform.name;
+            document.getElementById('platformDescription').textContent = platform.description;
+            
+            document.getElementById('durationDisplay').textContent = `${selectedDuration} Minutes`;
+            document.getElementById('priceDisplay').textContent = `KSH ${selectedPrice}`;
+        }
+
+        // Change selection
+        changeSelectionBtn.addEventListener('click', function() {
+            selectionSummary.classList.add('hidden');
+            durationSection.classList.remove('hidden');
+        });
+
+        // Start chat
+        startChatBtn.addEventListener('click', function() {
+            if (!selectedPlatform || !selectedDuration) {
+                alert('Please select both platform and duration');
+                return;
+            }
+
+            if (selectedPlatform === 'inapp') {
+                // Show in-app chat modal
+                inappChatModal.classList.remove('hidden');
+                inappChatModal.classList.add('flex');
+            } else {
+                // Redirect to external platform or show instructions
+                startExternalChat();
+            }
+        });
+
+        // Start in-app chat
+        startInAppChatBtn.addEventListener('click', function() {
+            const nickname = document.getElementById('chatNickname').value.trim();
+            if (!nickname) {
+                alert('Please enter a nickname to start chatting');
+                return;
+            }
+
+            // Store chat session info
+            const chatSessionData = {
+                platform: selectedPlatform,
+                duration: selectedDuration,
+                price: selectedPrice,
+                nickname: nickname,
+                startTime: new Date().toISOString()
+            };
+            
+            localStorage.setItem('currentChatSession', JSON.stringify(chatSessionData));
+
+            // Close modal and start chat session
+            inappChatModal.classList.add('hidden');
+            inappChatModal.classList.remove('flex');
+            
+            startChatSession();
+        });
+
+        // Start external chat (WhatsApp, SMS, Instagram)
+        function startExternalChat() {
+            const platformLinks = {
+                whatsapp: 'https://wa.me/254700000000', // Replace with actual number
+                sms: 'sms:+254700000000', // Replace with actual number
+                instagram: 'https://instagram.com/vocalvent' // Replace with actual handle
+            };
+
+            // Store chat session info
+            const chatSessionData = {
+                platform: selectedPlatform,
+                duration: selectedDuration,
+                price: selectedPrice,
+                startTime: new Date().toISOString()
+            };
+            
+            localStorage.setItem('currentChatSession', JSON.stringify(chatSessionData));
+
+            // Redirect to payment first, then to chat platform
+            localStorage.setItem('chatPaymentData', JSON.stringify({
+                platform: selectedPlatform,
+                duration: selectedDuration,
+                amount: selectedPrice
+            }));
+            
+            window.location.href = 'payment-chat.html';
+        }
+
+        // Start chat session
+        function startChatSession() {
+            // Set timer based on duration
+            chatTimeLeft = selectedDuration * 60;
+            updateTimerDisplay();
+            
+            // Start timer
+            timerInterval = setInterval(() => {
+                chatTimeLeft--;
+                updateTimerDisplay();
+                
+                if (chatTimeLeft <= 0) {
+                    endChatSession();
+                }
+            }, 1000);
+            
+            // Show chat interface
+            chatSession.classList.remove('hidden');
+            chatSession.classList.add('flex');
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(chatTimeLeft / 60);
+            const seconds = chatTimeLeft % 60;
+            chatTimer.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function endChatSession() {
+            clearInterval(timerInterval);
+            
+            // Save chat session record
+            const sessions = JSON.parse(localStorage.getItem('chatSessions') || '[]');
+            const sessionData = JSON.parse(localStorage.getItem('currentChatSession') || '{}');
+            sessionData.endTime = new Date().toISOString();
+            sessionData.durationCompleted = selectedDuration * 60 - chatTimeLeft;
+            sessions.push(sessionData);
+            localStorage.setItem('chatSessions', JSON.stringify(sessions));
+            
+            // Hide chat interface
+            chatSession.classList.add('hidden');
+            chatSession.classList.remove('flex');
+            
+            // Show thank you message
+            alert('Thank you for using Vocal Vent. Your chat session has ended.');
+        }
+
+        // Send message
+        sendMessageBtn.addEventListener('click', function() {
+            const message = chatInput.value.trim();
+            if (message) {
+                addMessageToChat(message, 'user');
+                chatInput.value = '';
+                
+                // Simulate response after delay
+                setTimeout(() => {
+                    const responses = [
+                        "I hear you. Please continue.",
+                        "Thank you for sharing that with me.",
+                        "That sounds difficult. How does that make you feel?",
+                        "I'm here to listen. Take your time.",
+                        "Your feelings are valid. Thank you for expressing them."
+                    ];
+                    const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                    addMessageToChat(randomResponse, 'listener');
+                }, 1000 + Math.random() * 2000);
+            }
+        });
+
+        // Enter key to send message
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessageBtn.click();
+            }
+        });
+
+        function addMessageToChat(message, sender) {
+            const chatContainer = document.querySelector('#chatSession .space-y-4');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = sender === 'user' ? 'flex justify-end' : 'flex justify-start';
+            
+            const messageContent = document.createElement('div');
+            messageContent.className = sender === 'user' 
+                ? 'bg-purple-600 text-white rounded-xl p-4 max-w-[80%]'
+                : 'bg-gray-200 rounded-xl p-4 max-w-[80%]';
+            
+            if (sender === 'listener') {
+                const nameSpan = document.createElement('p');
+                nameSpan.className = 'font-bold text-purple-600 mb-1';
+                nameSpan.textContent = 'Vocal Vent Listener';
+                messageContent.appendChild(nameSpan);
+            }
+            
+            const textSpan = document.createElement('p');
+            textSpan.textContent = message;
+            messageContent.appendChild(textSpan);
+            
+            messageDiv.appendChild(messageContent);
+            chatContainer.appendChild(messageDiv);
+            
+            // Scroll to bottom
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // Event listeners for modals
+        closeInAppModal.addEventListener('click', function() {
+            inappChatModal.classList.add('hidden');
+            inappChatModal.classList.remove('flex');
+        });
+
+        cancelInAppChatBtn.addEventListener('click', function() {
+            inappChatModal.classList.add('hidden');
+            inappChatModal.classList.remove('flex');
+        });
+
+        endChatBtn.addEventListener('click', function() {
+            if (confirm('Are you sure you want to end the chat session?')) {
+                endChatSession();
+            }
+        });
+
+        // Close modals when clicking outside
+        inappChatModal.addEventListener('click', function(e) {
+            if (e.target === inappChatModal) {
+                inappChatModal.classList.add('hidden');
+                inappChatModal.classList.remove('flex');
+            }
+        });
+    </script>
+</body>
+</html>
