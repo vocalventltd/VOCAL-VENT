@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Appointment - Vocal Vent</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .package-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .package-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .package-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .selected-package {
+            border: 3px solid #667eea;
+            background-color: rgba(102, 126, 234, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Navigation -->
+        <div class="flex justify-between items-center mb-8">
+            <a href="index.html" class="text-purple-600 hover:text-purple-800">
+                <i class="fas fa-home mr-2"></i>Home
+            </a>
+            <div class="text-sm text-gray-600">
+                <span id="userIndicator">Anonymous User</span>
+            </div>
+        </div>
+
+        <!-- Service Selection -->
+        <div class="max-w-6xl mx-auto">
+            <h1 class="text-3xl md:text-4xl font-bold text-center mb-2 text-gray-800">
+                Choose Your Venting Space
+            </h1>
+            <p class="text-center text-gray-600 mb-8">
+                Select how you'd like to vent - through a call or messaging
+            </p>
+
+            <!-- Service Options -->
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <!-- Call Appointment Card -->
+                <div id="callOption" class="bg-white rounded-xl shadow-lg p-8 cursor-pointer hover:shadow-xl transition duration-300 border-2 border-transparent hover:border-purple-500">
+                    <div class="text-center mb-6">
+                        <div class="text-purple-600 text-5xl mb-4">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Book a Call Appointment</h3>
+                        <p class="text-gray-600">
+                            Schedule a private call with one of our trained listeners. Choose from various duration packages.
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <button class="bg-purple-600 text-white py-3 px-8 rounded-lg font-bold hover:bg-purple-700 transition duration-300">
+                            Select Call Service
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Messaging Chat Card -->
+                <div id="chatOption" class="bg-white rounded-xl shadow-lg p-8 cursor-pointer hover:shadow-xl transition duration-300 border-2 border-transparent hover:border-purple-500">
+                    <div class="text-center mb-6">
+                        <div class="text-purple-600 text-5xl mb-4">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Start Messaging Chat</h3>
+                        <p class="text-gray-600">
+                            Vent through messaging via WhatsApp, SMS, Instagram DM, or In-App Chat.
+                        </p>
+                    </div>
+                    <div class="text-center">
+                        <button class="bg-purple-600 text-white py-3 px-8 rounded-lg font-bold hover:bg-purple-700 transition duration-300">
+                            Select Messaging
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call Packages Section (Initially Hidden) -->
+            <div id="callPackagesSection" class="hidden">
+                <h2 class="text-2xl md:text-3xl font-bold text-center mb-8 text-gray-800">
+                    Choose Your Call Package
+                </h2>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                    <!-- MINI Space Package -->
+                    <div class="package-card bg-white rounded-xl shadow-lg overflow-hidden">
+                        <div class="package-header p-6 text-center">
+                            <h3 class="text-xl font-bold mb-2">MINI Space</h3>
+                            <p class="text-sm opacity-90">10 Minute Venting Space</p>
+                        </div>
+                        <div class="p-6">
+                            <div class="text-center mb-6">
+                                <!-- Image placeholder - replace with actual image -->
+                                <div class="h-40 bg-gradient-to-br from-blue-100 to-purple-100 rounded-lg mb-4 flex items-center justify-center">
+                                    <i class="fas fa-clock text-4xl text-purple-500"></i>
+                                </div>
+                                <p class="text-gray-600 mb-4">
+                                    The Vocal Vent MINI Space offers you a 10 Minute Space to vent and release whatever is holding you back, Speaking it out is always a step in letting it go.
+                                </p>
+                                <div class="text-3xl font-bold text-gray-800 mb-2">KSH 200</div>
+                            </div>
+                            <button class="w-full bg-purple-600 text-white py-3 rounded-lg font-bold hover:bg-purple-700 transition duration-300 select-package" data-package="MINI" data-price="200">
+                                Select MINI Space
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- LITE Space Package -->
+                    <div class="package-card bg-white rounded-xl shadow-lg overflow-hidden">
+                        <div class="package-header p-6 text-center">
+                            <h3 class="text-xl font-bold mb-2">LITE Space</h3>
+                            <p class="text-sm opacity-90">20 Minute Venting Space</p>
+                        </div>
+                        <div class="p-6">
+                            <div class="text-center mb-6">
+                                <div class="h-40 bg-gradient-to-br from-green-100 to-blue-100 rounded-lg mb-4 flex items-center justify-center">
+                                    <i class="fas fa-clock text-4xl text-blue-500"></i>
+                                </div>
+                                <p class="text-gray-600 mb-4">
+                                    The Vocal Vent LITE Space offers you a 20 Minute Space to vent and release whatever is holding you back, Speaking it out is always a step in letting it go.
+                                </p>
+                                <div class="text-3xl font-bold text-gray-800 mb-2">KSH 400</div>
+                            </div>
+                            <button class="w-full bg-purple-600 text-white py-3 rounded-lg font-bold hover:bg-purple-700 transition duration-300 select-package" data-package="LITE" data-price="400">
+                                Select LITE Space
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- V.I.P Space Package -->
+                    <div class="package-card bg-white rounded-xl shadow-lg overflow-hidden">
+                        <div class="package-header p-6 text-center">
+                            <h3 class="text-xl font-bold mb-2">V.I.P Space</h3>
+                            <p class="text-sm opacity-90">2 Hour Venting Space</p>
+                        </div>
+                        <div class="p-6">
+                            <div class="text-center mb-6">
+                                <div class="h-40 bg-gradient-to-br from-yellow-100 to-red-100 rounded-lg mb-4 flex items-center justify-center">
+                                    <i class="fas fa-crown text-4xl text-yellow-500"></i>
+                                </div>
+                                <p class="text-gray-600 mb-4">
+                                    The Vocal Vent V.I.P Space offers you a 2 Hour Space to vent and release whatever is holding you back, Speaking it out is always a step in letting it go.
+                                </p>
+                                <div class="text-3xl font-bold text-gray-800 mb-2">KSH 1,000</div>
+                            </div>
+                            <button class="w-full bg-purple-600 text-white py-3 rounded-lg font-bold hover:bg-purple-700 transition duration-300 select-package" data-package="VIP" data-price="1000">
+                                Select V.I.P Space
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- CORPORATE Space Package -->
+                    <div class="package-card bg-white rounded-xl shadow-lg overflow-hidden">
+                        <div class="package-header p-6 text-center">
+                            <h3 class="text-xl font-bold mb-2">CORPORATE Space</h3>
+                            <p class="text-sm opacity-90">For Organizations</p>
+                        </div>
+                        <div class="p-6">
+                            <div class="text-center mb-6">
+                                <div class="h-40 bg-gradient-to-br from-gray-100 to-blue-100 rounded-lg mb-4 flex items-center justify-center">
+                                    <i class="fas fa-building text-4xl text-gray-500"></i>
+                                </div>
+                                <p class="text-gray-600 mb-4">
+                                    The Vocal Vent Corporate Space offers company employees a 10 Minute Space 4 Times a Month to vent and release whatever is holding them back.
+                                </p>
+                                <div class="text-xl font-bold text-gray-800 mb-2">Custom Pricing</div>
+                            </div>
+                            <a href="corporate.html" class="w-full block bg-gray-600 text-white py-3 rounded-lg font-bold hover:bg-gray-700 transition duration-300 text-center">
+                                GET PRICING QUOTE
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- EXPRESS LINE Space Package -->
+                    <div class="package-card bg-white rounded-xl shadow-lg overflow-hidden md:col-span-2 lg:col-span-1 lg:col-start-2">
+                        <div class="package-header p-6 text-center">
+                            <h3 class="text-xl font-bold mb-2">EXPRESS LINE Space</h3>
+                            <p class="text-sm opacity-90">Instant Calls</p>
+                        </div>
+                        <div class="p-6">
+                            <div class="text-center mb-6">
+                                <div class="h-40 bg-gradient-to-br from-red-100 to-orange-100 rounded-lg mb-4 flex items-center justify-center">
+                                    <i class="fas fa-bolt text-4xl text-orange-500"></i>
+                                </div>
+                                <p class="text-gray-600 mb-4">
+                                    The Vocal Vent Express Line Space allows instant calls without scheduling. This Space offers you a 30 Minute Space to vent and release whatever is holding you back.
+                                </p>
+                                <div class="text-3xl font-bold text-gray-800 mb-2">KSH 500</div>
+                            </div>
+                            <button class="w-full bg-purple-600 text-white py-3 rounded-lg font-bold hover:bg-purple-700 transition duration-300 select-package" data-package="EXPRESS" data-price="500">
+                                Select EXPRESS LINE
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Selected Package Info (Hidden until package selected) -->
+            <div id="selectedPackageInfo" class="hidden bg-white rounded-xl shadow-lg p-8 mb-8">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-2" id="selectedPackageName"></h3>
+                        <p class="text-gray-600" id="selectedPackageDescription"></p>
+                        <div class="text-3xl font-bold text-purple-600 mt-4" id="selectedPackagePrice"></div>
+                    </div>
+                    <button id="proceedBtn" class="bg-green-600 text-white py-3 px-8 rounded-lg font-bold hover:bg-green-700 transition duration-300">
+                        Proceed to Booking
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Before You Proceed Modal -->
+    <div id="beforeProceedModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-8">
+                <div class="text-center mb-6">
+                    <i class="fas fa-info-circle text-blue-500 text-5xl mb-4"></i>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">
+                        Before You Proceed
+                    </h3>
+                    <p class="text-gray-600" id="modalPackageName"></p>
+                </div>
+                
+                <div class="space-y-4 mb-8">
+                    <div class="flex items-start">
+                        <i class="fas fa-user-secret text-purple-500 mt-1 mr-3"></i>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Anonymity is Key</h4>
+                            <p class="text-gray-600">
+                                Do NOT use your real name where names are required. Instead, use a Nickname and make this nickname consistent in all pages where required.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <i class="fas fa-shield-alt text-purple-500 mt-1 mr-3"></i>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Phone Number Privacy</h4>
+                            <p class="text-gray-600">
+                                Your provided Phone number will only be used to contact you and remains private and secure as per our Data Privacy and Protection Policy.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <i class="fas fa-trash-alt text-purple-500 mt-1 mr-3"></i>
+                        <div>
+                            <h4 class="font-bold text-gray-800">Data Protection</h4>
+                            <p class="text-gray-600">
+                                Please be assured that all data is shredded within 24 hours after the call has been made to assure your data is Protected and Remains Private.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex gap-4">
+                    <button id="proceedToFormBtn" 
+                            class="flex-1 bg-green-600 text-white py-3 px-4 rounded-lg font-bold hover:bg-green-700 transition duration-300">
+                        I UNDERSTAND, PROCEED
+                    </button>
+                    <button id="cancelProceedBtn" 
+                            class="flex-1 border border-gray-300 text-gray-700 py-3 px-4 rounded-lg font-bold hover:bg-gray-50 transition duration-300">
+                        CANCEL
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check if user has agreed to disclaimer
+        window.addEventListener('DOMContentLoaded', function() {
+            const agreement = localStorage.getItem('vocalVentAgreement');
+            if (!agreement) {
+                window.location.href = 'disclaimer.html';
+                return;
+            }
+        });
+
+        // Service selection
+        const callOption = document.getElementById('callOption');
+        const chatOption = document.getElementById('chatOption');
+        const callPackagesSection = document.getElementById('callPackagesSection');
+        const selectedPackageInfo = document.getElementById('selectedPackageInfo');
+        const selectedPackageName = document.getElementById('selectedPackageName');
+        const selectedPackageDescription = document.getElementById('selectedPackageDescription');
+        const selectedPackagePrice = document.getElementById('selectedPackagePrice');
+        const proceedBtn = document.getElementById('proceedBtn');
+
+        let selectedPackage = null;
+
+        callOption.addEventListener('click', function() {
+            callPackagesSection.classList.remove('hidden');
+            selectedPackageInfo.classList.add('hidden');
+            // Smooth scroll to packages
+            callPackagesSection.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        chatOption.addEventListener('click', function() {
+            window.location.href = 'messaging.html';
+        });
+
+        // Package selection
+        document.querySelectorAll('.select-package').forEach(button => {
+            button.addEventListener('click', function() {
+                const packageName = this.getAttribute('data-package');
+                const price = this.getAttribute('data-price');
+                
+                // Update all buttons
+                document.querySelectorAll('.select-package').forEach(btn => {
+                    btn.classList.remove('bg-purple-800');
+                    btn.classList.add('bg-purple-600');
+                    btn.textContent = btn.textContent.replace('Selected', 'Select');
+                });
+                
+                // Update selected button
+                this.classList.remove('bg-purple-600');
+                this.classList.add('bg-purple-800');
+                this.textContent = '✓ Selected';
+                
+                // Store selected package
+                selectedPackage = {
+                    name: packageName,
+                    price: price,
+                    fullName: this.closest('.package-card').querySelector('h3').textContent,
+                    description: this.closest('.package-card').querySelector('p').textContent
+                };
+                
+                // Show selected package info
+                selectedPackageName.textContent = `${selectedPackage.fullName}`;
+                selectedPackageDescription.textContent = selectedPackage.description;
+                selectedPackagePrice.textContent = `KSH ${selectedPackage.price}`;
+                selectedPackageInfo.classList.remove('hidden');
+                
+                // Smooth scroll to selected package info
+                selectedPackageInfo.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Before Proceed Modal
+        const beforeProceedModal = document.getElementById('beforeProceedModal');
+        const modalPackageName = document.getElementById('modalPackageName');
+        const proceedToFormBtn = document.getElementById('proceedToFormBtn');
+        const cancelProceedBtn = document.getElementById('cancelProceedBtn');
+
+        proceedBtn.addEventListener('click', function() {
+            if (selectedPackage) {
+                modalPackageName.textContent = `Thank you for choosing ${selectedPackage.fullName}.`;
+                beforeProceedModal.classList.remove('hidden');
+                beforeProceedModal.classList.add('flex');
+            }
+        });
+
+        proceedToFormBtn.addEventListener('click', function() {
+            // Store selected package in localStorage
+            localStorage.setItem('selectedPackage', JSON.stringify(selectedPackage));
+            // Redirect to booking form
+            window.location.href = 'booking-form.html';
+        });
+
+        cancelProceedBtn.addEventListener('click', function() {
+            beforeProceedModal.classList.add('hidden');
+            beforeProceedModal.classList.remove('flex');
+        });
+
+        // Close modal when clicking outside
+        beforeProceedModal.addEventListener('click', function(e) {
+            if (e.target === beforeProceedModal) {
+                beforeProceedModal.classList.add('hidden');
+                beforeProceedModal.classList.remove('flex');
+            }
+        });
+    </script>
+</body>
+</html>
