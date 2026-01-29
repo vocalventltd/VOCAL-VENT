@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vocal Vent - Safe Space to Vent</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="gradient-bg text-white p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-microphone-alt text-2xl"></i>
+                <h1 class="text-2xl font-bold">Vocal Vent</h1>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#about" class="hover:text-gray-200">About</a>
+                <a href="#services" class="hover:text-gray-200">Services</a>
+                <a href="#contact" class="hover:text-gray-200">Contact</a>
+            </div>
+            <button id="menuBtn" class="md:hidden text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="md:hidden hidden mt-4 space-y-3">
+            <a href="#about" class="block hover:text-gray-200">About</a>
+            <a href="#services" class="block hover:text-gray-200">Services</a>
+            <a href="#contact" class="block hover:text-gray-200">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-20 px-4">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6 fade-in">
+                Find Your Space to Vent
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 opacity-90">
+                A safe, anonymous space to express your thoughts and emotions
+            </p>
+            <div class="space-x-4">
+                <a href="disclaimer.html" 
+                   class="bg-white text-purple-700 px-8 py-3 rounded-full font-bold text-lg hover:bg-gray-100 transition duration-300 inline-block">
+                    Get Started
+                </a>
+                <a href="#services" 
+                   class="border-2 border-white text-white px-8 py-3 rounded-full font-bold text-lg hover:bg-white hover:text-purple-700 transition duration-300 inline-block">
+                    Learn More
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 px-4">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">
+                What is Vocal Vent?
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center p-6 bg-white rounded-xl shadow-lg">
+                    <div class="text-purple-600 text-4xl mb-4">
+                        <i class="fas fa-user-secret"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Anonymous</h3>
+                    <p class="text-gray-600">
+                        No sign-up required. Your identity remains private throughout the process.
+                    </p>
+                </div>
+                <div class="text-center p-6 bg-white rounded-xl shadow-lg">
+                    <div class="text-purple-600 text-4xl mb-4">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Safe Space</h3>
+                    <p class="text-gray-600">
+                        A judgment-free zone where you can freely express yourself.
+                    </p>
+                </div>
+                <div class="text-center p-6 bg-white rounded-xl shadow-lg">
+                    <div class="text-purple-600 text-4xl mb-4">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">24/7 Support</h3>
+                    <p class="text-gray-600">
+                        Multiple venting options: Calls, SMS, WhatsApp, and In-App Chat.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-16 px-4 bg-gray-100">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800">
+                Our Services
+            </h2>
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <div class="text-purple-600 text-3xl mb-4">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Voice Call Spaces</h3>
+                    <p class="text-gray-600 mb-6">
+                        Schedule a call with our trained listeners. Choose from different duration packages that suit your needs.
+                    </p>
+                    <a href="disclaimer.html" 
+                       class="bg-purple-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-purple-700 transition duration-300 inline-block">
+                        Book a Call
+                    </a>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <div class="text-purple-600 text-3xl mb-4">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4">Messaging Chat</h3>
+                    <p class="text-gray-600 mb-6">
+                        Vent through messaging via WhatsApp, SMS, Instagram DM, or our In-App Chat system.
+                    </p>
+                    <a href="disclaimer.html" 
+                       class="bg-purple-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-purple-700 transition duration-300 inline-block">
+                        Start Chatting
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-800 text-white py-12 px-4">
+        <div class="container mx-auto">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">Vocal Vent</h3>
+                    <p class="text-gray-400">
+                        Providing safe spaces for emotional expression and release.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="disclaimer.html" class="text-gray-400 hover:text-white">Get Started</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-white">Services</a></li>
+                        <li><a href="corporate.html" class="text-gray-400 hover:text-white">Corporate</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-xl font-bold mb-4">Important Note</h4>
+                    <p class="text-gray-400 text-sm">
+                        We are not licensed therapists. Our services are not a substitute for professional mental health care.
+                    </p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 Vocal Vent. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menuBtn').addEventListener('click', function() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
